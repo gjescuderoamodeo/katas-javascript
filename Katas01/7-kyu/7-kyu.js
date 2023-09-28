@@ -47,13 +47,69 @@ function convertArrayStringsToArrayNumbers(array) {
     return numbers;
 }
 
-function removeValues() {
+function removeValues(sourceArray, valuesToRemoveArray) {
+    if (!Array.isArray(sourceArray)) {
+        return [];
+    }
+
+    if (!Array.isArray(valuesToRemoveArray)) {
+        return sourceArray;
+    }
+
+    let result = sourceArray.filter((element) => !valuesToRemoveArray.includes(element));
+
+    return result;
 }
 
-function findDuplicates() {
+
+function findDuplicates(array) {
+    if (!Array.isArray(array)) {
+        return [];
+    }
+
+    var unique = [];
+    var duplicates = [];
+
+    array.forEach((element) => {
+        if (unique.indexOf(element) === -1) {
+            unique.push(element);
+        } else if (duplicates.indexOf(element) === -1) {
+            duplicates.push(element);
+        }
+    });
+
+    return duplicates;
 }
 
-function convertNumberToStringWords() {
+
+
+
+
+function convertNumberToStringWords(number) {
+    if (typeof number !== 'number') {
+        return '';
+    }
+
+    const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    const isNegative = number < 0;
+
+    if (isNegative) {
+        number = Math.abs(number);
+    }
+
+    const numberString = String(number);
+    const resultArray = [];
+
+    for (let i = 0; i < numberString.length; i++) {
+        const digit = parseInt(numberString[i]);
+        resultArray.push(words[digit]);
+    }
+
+    if (isNegative) {
+        resultArray.unshift('neg');
+    }
+
+    return resultArray.join('.');
 }
 
 module.exports = { getAVG, replaceVocalWithPosition, convertArrayStringsToArrayNumbers, removeValues, findDuplicates, convertNumberToStringWords };
