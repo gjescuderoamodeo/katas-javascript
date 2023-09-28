@@ -15,15 +15,9 @@ function getNoldorByMurdered(noldorRoyalHouse, isMurdered) {
 
     let deathToTheElves = [];
 
-    noldorRoyalHouse.forEach(element => {
+    noldorRoyalHouse.children.forEach(element => {
         if (element.murdered == isMurdered) {
             deathToTheElves.push(element);
-            if (element.children.length != 0) {
-                //por cada hijo saco lo mismo
-                element.children.forEach(element => {
-                    getNoldorByMurdered2(element.children, isMurdered);
-                })
-            }
         }
     });
 
@@ -31,21 +25,41 @@ function getNoldorByMurdered(noldorRoyalHouse, isMurdered) {
 
 }
 
-function getNoldorByMurdered2(hijo, isMurdered) {
-    let deathToTheElves = []
-    hijo.forEach(element => {
-        if (element.murdered == isMurdered) {
-            deathToTheElves.push(element);
-            if (element.children.length != 0) {
-                //por cada hijo saco lo mismo
-                element.children.forEach(element => {
-                    getNoldorByMurdered2(element.children, isMurdered);
-                })
+/*function getNoldorByMurdered(noldorRoyalHouse, isMurdered) {
+    if (!Array.isArray(noldorRoyalHouse) || typeof isMurdered !== "boolean") {
+        return [];
+    }
+
+    const members = [];
+
+    function findMembersWithMurderedStatus(house) {
+        if (house.murdered === isMurdered) {
+            const member = {
+                name: house.name,
+                lifespan: house.lifespan,
+                murdered: house.murdered,
+                cause_of_death: house.cause_of_death,
+                children: [],
+            };
+
+            if (Array.isArray(house.children)) {
+                member.children = house.children.map(child => child.name);
             }
+
+            members.push(member);
         }
+        if (Array.isArray(house.children)) {
+            house.children.forEach(child => findMembersWithMurderedStatus(child));
+        }
+    }
+
+    noldorRoyalHouse.forEach(member => {
+        findMembersWithMurderedStatus(member);
     });
-    return deathToTheElves;
-}
+
+    return members;
+} */
+
 
 
 module.exports = { getNoldorByMurdered, getSumNodes };
