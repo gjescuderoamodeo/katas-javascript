@@ -13,21 +13,38 @@ function getNoldorByMurdered(noldorRoyalHouse, isMurdered) {
         return [];
     }
 
-    if (!noldorRoyalHouse || !noldorRoyalHouse.value) {
-        return;
-    }
+    let deathToTheElves = [];
 
-    deathToTheElves = [];
+    noldorRoyalHouse.forEach(element => {
+        if (element.murdered == isMurdered) {
+            deathToTheElves.push(element);
+            if (element.children.length != 0) {
+                //por cada hijo saco lo mismo
+                element.children.forEach(element => {
+                    getNoldorByMurdered2(element.children, isMurdered);
+                })
+            }
+        }
+    });
 
+    return deathToTheElves;
 
 }
 
-function pickDeathElves(noldorRoyalHouse) {
-    if (!noldorRoyalHouse || !noldorRoyalHouse.value) {
-        return;
-    }
-
-    return tree.value + getSumNodes(tree.left) + getSumNodes(tree.right)
+function getNoldorByMurdered2(hijo, isMurdered) {
+    let deathToTheElves = []
+    hijo.forEach(element => {
+        if (element.murdered == isMurdered) {
+            deathToTheElves.push(element);
+            if (element.children.length != 0) {
+                //por cada hijo saco lo mismo
+                element.children.forEach(element => {
+                    getNoldorByMurdered2(element.children, isMurdered);
+                })
+            }
+        }
+    });
+    return deathToTheElves;
 }
 
 
