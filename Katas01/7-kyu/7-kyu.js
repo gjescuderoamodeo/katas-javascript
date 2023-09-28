@@ -97,11 +97,11 @@ function convertNumberToStringWords(number) {
         number = Math.abs(number);
     }
 
-    const numberString = String(number);
-    const resultArray = [];
+    let numberString = String(number);
+    let resultArray = [];
 
     for (let i = 0; i < numberString.length; i++) {
-        const digit = parseInt(numberString[i]);
+        let digit = parseInt(numberString[i]);
         resultArray.push(words[digit]);
     }
 
